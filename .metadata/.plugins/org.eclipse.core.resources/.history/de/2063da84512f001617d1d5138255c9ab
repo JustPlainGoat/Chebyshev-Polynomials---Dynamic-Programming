@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+
+public class Driver {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the Chebyshev Polynomial to calculate: ");
+		int num = scanner.nextInt();
+		
+	}
+	
+	private static Polynomial calculatePolynomial(int n) {
+		if(n == 0) {
+			int[] coeffs = {1};
+			return new Polynomial(1, coeffs);
+		}
+	}
+	
+	private class Polynomial {
+		
+		public int numberOfTerms;
+		public int[] coefficients;
+		
+		public Polynomial(int numberOfTerms, int[] coefficients) {
+			this.numberOfTerms = numberOfTerms;
+			this.coefficients = coefficients;
+		}
+		
+	}
+
+}

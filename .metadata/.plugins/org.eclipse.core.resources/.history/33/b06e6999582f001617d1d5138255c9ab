@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+
+public class Driver {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the Chebyshev Polynomial to calculate: ");
+		int num = scanner.nextInt();
+		calculatePolynomial(num);
+	}
+	
+	private static Polynomial calculatePolynomial(int n) {
+		Polynomial[] chebyshevPolynomials = new Polynomial[n + 1];
+		chebyshevPolynomials[0] = new Polynomial(new int[] {1});
+		chebyshevPolynomials[1] = new Polynomial(new int[] {0,1});
+		
+		if(n == 0) {
+			return chebyshevPolynomials[0];
+		} else if(n == 1) {
+			return chebyshevPolynomials[1];
+		}
+		
+		for(int i = 2; i <= n; i++) {
+			// Might need to add + 1
+			int[] coefficients = new int[chebyshevPolynomials[i - 1].coefficients.length + 1];
+			int[] secondCoefficients = new int[chebyshevPolynomials[i - 2].coefficients.length];
+			
+			for(int j = 0; j < chebyshevPolynomials[i - 1].coefficients.length; j++) {
+				coefficients[j + 1] = 2 * chebyshevPolynomials[i - 1].coefficients[j];
+			}
+			for(int j = 0; j < chebyshevPolynomials[i - 2].coefficients.length; j++) {
+				secondCoefficients[j] = -1 * chebyshevPolynomials[i - 2].coefficients[j];
+			}
+			print(coefficients);
+			print(secondCoefficients);
+			
+			int[] finalCoefficients = new int[i];
+			for(int j = 0; j <= i; j++) {
+				if(j > secondCoefficients.length) {
+					finalCoefficients[j] = coefficients[j];
+				} else {
+					finalCoefficients[j] = coefficients[j] + secondCoefficients[j];
+				}
+			}
+			chebyshevPolynomials[i] = new Polynomial(finalCoefficients);
+		}
+		return chebyshevPolynomials[n];
+	}
+	
+	private static void print(int[] ar) {
+		for(int i = 0; i < ar.length; i++) {
+			System.out.print(ar[i] + " ");
+		}
+		System.out.println();
+	}
+	
+	// The number represents the coefficient. The index represents the exponent.
+	private static class Polynomial {
+		
+		public int[] coefficients;
+		
+		public Polynomial(int[] coefficients) {
+			this.coefficients = coefficients;
+		}
+		
+		public void printPolynomial() {
+			
+		}
+		
+	}
+
+}
