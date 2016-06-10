@@ -1,5 +1,5 @@
 # Chebyshev-Polynomials--Dynamic-Programming
-The following program will calculate the Chebyshev Polynomial up to whatever the user enters.
+The following program will calculate a Chebyshev Polynomial up to whatever the user enters.
 
 Recurrence Relation Used:
 T[n+1][x] = 2x*T[n][x] - T[n-1][x]
